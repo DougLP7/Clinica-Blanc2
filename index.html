@@ -67,7 +67,7 @@
     display:flex; align-items:center; justify-content:space-between;
     padding: 12px 24px; max-width:1120px; margin:0 auto;
   }
-  .logo-img{ height: 40px; width:auto; }
+  .logo-img{ height: 58px; width:auto; }
   .header-cta{
     display:inline-flex; align-items:center; gap:8px;
     font-size: 14px; font-weight:700; color: var(--slate);
@@ -78,13 +78,12 @@
   /* ---------- HERO ---------- */
   .hero{
     padding: 56px 0 80px;
-    background:
-      radial-gradient(ellipse at top right, var(--porcelain-deep) 0%, transparent 55%),
-      var(--porcelain);
+    background: url('images/shadow-bg.svg') center/cover no-repeat, var(--porcelain);
   }
   .hero-grid{
-    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:56px; align-items:center;
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:56px; align-items:start;
   }
+  .hero-logo{ display:block; width:100%; max-width: 320px; height:auto; margin: 0 auto 36px; }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
     font-size: 12.5px; font-weight:700; letter-spacing: 0.14em; text-transform:uppercase;
@@ -320,25 +319,20 @@
 
   /* ---------- FOOTER ---------- */
   footer{ padding: 40px 0; border-top: 1px solid var(--line); }
-  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
-  footer img{ height: 30px; width:auto; }
+  footer .wrap{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; }
   footer p{ font-size: 12.5px; color: var(--graphite-soft); }
-  .footer-info{ text-align:right; }
   .footer-address{
-    display:flex; align-items:center; justify-content:flex-end; gap:6px;
-    font-size: 12.5px; color: var(--graphite-soft); margin-bottom: 4px;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    font-size: 12.5px; color: var(--graphite-soft);
   }
   .footer-address svg{ width:14px; height:14px; color: var(--slate); flex-shrink:0; }
-  @media (max-width: 520px){
-    footer .wrap{ flex-direction:column; align-items:flex-start; }
-    .footer-info{ text-align:left; }
-    .footer-address{ justify-content:flex-start; }
-  }
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 880px){
     section{ padding: 56px 0; }
     .hero{ padding: 32px 0 56px; }
+    .logo-img{ height: 40px; }
+    .hero-logo{ display:none; }
     .hero-grid{ grid-template-columns: 1fr; gap: 40px; }
     .hero-photo{ order:-1; aspect-ratio: 9/16; max-width: 320px; margin-left:auto; margin-right:auto; }
     .benefit-grid{ grid-template-columns: 1fr; }
@@ -375,6 +369,7 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
+        <img class="hero-logo" src="images/blanc-logo.png" alt="Blanc Odontologia Estética">
         <span class="eyebrow">Implantes dentários</span>
         <h1>Recupere a firmeza do seu <span>sorriso</span></h1>
         <p class="lede">
@@ -659,7 +654,6 @@
 
 <footer>
   <div class="wrap">
-    <img src="images/blanc-logo.png" alt="Blanc Odontologia Estética">
     <div class="footer-info">
       <div class="footer-address">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-11.5A7 7 0 105 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
