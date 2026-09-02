@@ -27,7 +27,7 @@
     --porcelain: #FAF7F2;
     --porcelain-deep: #F0EAE0;
     --graphite: #2B2A28;
-    --graphite-soft: #5B5850;
+    --graphite-soft: #403D35;
     --slate: #465767;
     --slate-deep: #232E37;
     --brass: #B08D57;
@@ -53,9 +53,14 @@
   body::before{
     content: '';
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     z-index: -1;
-    background: url('images/page-bg.jpg') center top / cover no-repeat;
+    background:
+      linear-gradient(rgba(250,247,242,0.6), rgba(250,247,242,0.6)),
+      url('images/page-bg.jpg') center top / cover no-repeat;
     pointer-events: none;
   }
   img,svg{ display:block; max-width:100%; }
@@ -104,7 +109,7 @@
   }
   .hero h1 span{ color: var(--brass); font-style: italic; }
   .hero p.lede{
-    margin-top: 22px; font-size: 17px; color: var(--graphite-soft); max-width: 46ch;
+    margin-top: 22px; font-size: 17px; font-weight: 500; color: var(--graphite-soft); max-width: 46ch;
   }
   .trust-row{
     margin-top: 32px; display:flex; gap:28px; flex-wrap:wrap;
@@ -314,7 +319,7 @@
   }
   .benefit-card svg{ width:26px; height:26px; color: var(--brass); margin-bottom:18px; }
   .benefit-card h3{ font-size: 17px; font-weight:600; margin-bottom:10px; color: var(--slate-deep); }
-  .benefit-card p{ font-size: 14px; color: var(--graphite-soft); }
+  .benefit-card p{ font-size: 14px; font-weight: 500; color: var(--graphite-soft); }
 
   /* ---------- PROCESS ---------- */
   .process-grid{
@@ -330,7 +335,7 @@
     margin-bottom: 14px;
   }
   .process-step h3{ font-size: 16px; margin-bottom: 8px; color: var(--slate-deep); }
-  .process-step p{ font-size: 13.5px; color: var(--graphite-soft); }
+  .process-step p{ font-size: 13.5px; font-weight: 500; color: var(--graphite-soft); }
 
   /* ---------- CTA BAND ---------- */
   .cta-band{
@@ -340,13 +345,13 @@
     display:flex; align-items:center; justify-content:space-between; gap: 32px; flex-wrap: wrap;
   }
   .cta-band h2{ font-size: 26px; color: var(--slate-deep); max-width: 24ch; }
-  .cta-band p{ margin-top: 8px; color: var(--graphite-soft); font-size: 14.5px; }
+  .cta-band p{ margin-top: 8px; color: var(--graphite-soft); font-size: 14.5px; font-weight: 500; }
 
   /* ---------- FAQ ---------- */
   .faq-item{ border-top: 1px solid var(--line); padding: 22px 0; }
   .faq-item:last-child{ border-bottom: 1px solid var(--line); }
   .faq-item h3{ font-size: 16px; font-weight:600; color: var(--slate-deep); margin-bottom:8px; }
-  .faq-item p{ font-size: 14.5px; color: var(--graphite-soft); max-width: 60ch; }
+  .faq-item p{ font-size: 14.5px; font-weight: 500; color: var(--graphite-soft); max-width: 60ch; }
 
   /* ---------- MODAL ---------- */
   .modal-overlay{
