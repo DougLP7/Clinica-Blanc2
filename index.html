@@ -53,8 +53,7 @@
   body::before{
     content: '';
     position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
+    top: 0; left: 0; right: 0;
     height: 100vh;
     height: 100dvh;
     z-index: -1;
@@ -228,18 +227,20 @@
   .protocol-section .eyebrow{ color: var(--brass-light); }
   .protocol-section .eyebrow::before{ background: var(--brass-light); }
   .protocol-section h2{
-    font-size: clamp(28px, 3.6vw, 40px); line-height:1.15; color:#fff; margin-bottom: 20px;
+    font-size: clamp(30px, 4vw, 44px); line-height:1.15; color:#fff; margin-bottom: 22px;
   }
-  .protocol-section p{ font-size: 16px; color: rgba(250,247,242,0.82); margin-bottom: 16px; max-width: 52ch; }
-  .protocol-section strong{ color: var(--brass-light); font-weight:700; }
-  .protocol-callout{
-    font-family: var(--font-display); font-style: italic; font-size: 19px;
-    color: #fff; border-left: 3px solid var(--brass); padding-left: 18px;
-    margin: 26px 0; max-width: 48ch;
+  .protocol-intro{ font-size: 18px; color: rgba(250,247,242,0.85); margin-bottom: 26px; max-width: 52ch; }
+
+  .protocol-bullets{ list-style:none; margin: 0 0 30px; display:flex; flex-direction:column; gap:16px; }
+  .protocol-bullets li{
+    display:flex; align-items:flex-start; gap:14px;
+    font-size: 20px; font-weight:700; color:#fff; line-height:1.3;
   }
-  .protocol-callout strong{ color: var(--brass-light); font-style: normal; }
-  .protocol-section h3{ font-size: 21px; color:#fff; margin: 8px 0 10px; }
-  .protocol-lead{ font-size: 15px; color: rgba(250,247,242,0.75); margin-bottom: 22px; }
+  .protocol-bullets svg{
+    width:26px; height:26px; flex-shrink:0; margin-top:2px; color: var(--brass);
+  }
+
+  .protocol-lead{ font-size: 17px; font-weight:600; color: rgba(250,247,242,0.9); margin-bottom: 24px; }
 
   .protocol-compare{ display:flex; flex-direction:column; gap: 20px; }
   .protocol-card{
@@ -310,33 +311,6 @@
     .results-carousel{ max-width: 520px; margin: 0 auto; }
   }
 
-  /* ---------- BENEFITS ---------- */
-  .benefits h2{ font-size: clamp(26px,3vw,34px); color: var(--slate-deep); }
-  .benefit-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  .benefit-card{
-    border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 28px 24px; background: #fff;
-  }
-  .benefit-card svg{ width:26px; height:26px; color: var(--brass); margin-bottom:18px; }
-  .benefit-card h3{ font-size: 17px; font-weight:600; margin-bottom:10px; color: var(--slate-deep); }
-  .benefit-card p{ font-size: 14px; font-weight: 500; color: var(--graphite-soft); }
-
-  /* ---------- PROCESS ---------- */
-  .process-grid{
-    display:grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-    border-top: 1px solid var(--line);
-  }
-  .process-step{
-    padding: 28px 22px 28px 0; border-right: 1px solid var(--line);
-  }
-  .process-step:last-child{ border-right:none; }
-  .process-num{
-    font-family: var(--font-display); font-size: 15px; color: var(--brass); font-weight:600;
-    margin-bottom: 14px;
-  }
-  .process-step h3{ font-size: 16px; margin-bottom: 8px; color: var(--slate-deep); }
-  .process-step p{ font-size: 13.5px; font-weight: 500; color: var(--graphite-soft); }
-
   /* ---------- CTA BAND ---------- */
   .cta-band{
     background: var(--porcelain-deep);
@@ -393,9 +367,6 @@
     .hero-logo{ max-width: 220px; margin-bottom: 24px; }
     .hero-grid{ grid-template-columns: 1fr; gap: 40px; }
     .hero-photo{ order:-1; aspect-ratio: 9/16; max-width: 320px; margin-left:auto; margin-right:auto; }
-    .benefit-grid{ grid-template-columns: 1fr; }
-    .process-grid{ grid-template-columns: 1fr 1fr; }
-    .process-step{ border-right:none; border-bottom: 1px solid var(--line); padding: 22px 0; }
     .cta-band{ padding: 32px; flex-direction:column; align-items:flex-start; }
     .whatsapp-btn{ width:100%; justify-content:center; }
     .gallery-grid{ grid-template-columns: 1fr 1fr; grid-template-rows: 150px 110px 110px; height:auto; }
@@ -479,16 +450,25 @@
     <div class="wrap protocol-grid">
       <div>
         <span class="eyebrow">Prótese protocolo sobre implantes</span>
-        <h2>Cansado da dentadura soltar, machucar ou atrapalhar na hora de comer?</h2>
-        <p>Você não precisa se acostumar com uma prótese que se movimenta dentro da boca.</p>
-        <p>A <strong>prótese protocolo sobre implantes</strong> é uma solução fixa, parafusada sobre implantes dentários, que oferece muito mais estabilidade do que uma dentadura convencional.</p>
+        <h2>Cansado da dentadura solta ou que machuca?</h2>
+        <p class="protocol-intro">A prótese protocolo é fixa, parafusada sobre implantes — muito mais estável que uma dentadura comum.</p>
 
-        <div class="protocol-callout">
-          <strong>Mais segurança para mastigar. Mais confiança para sorrir. Mais liberdade para viver sem a preocupação constante com a prótese.</strong>
-        </div>
+        <ul class="protocol-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+            Mais segurança para mastigar
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+            Mais confiança para sorrir
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+            Mais liberdade no dia a dia
+          </li>
+        </ul>
 
-        <h3>Dê o primeiro passo para deixar a dentadura móvel para trás.</h3>
-        <p class="protocol-lead">👉 Agende sua avaliação e descubra se a prótese protocolo é indicada para você.</p>
+        <p class="protocol-lead">Agende sua avaliação e descubra se é indicada pra você.</p>
 
         <button type="button" class="whatsapp-btn lg js-open-lead" data-mensagem="Olá, quero saber se a prótese protocolo é indicada pro meu caso." data-origem="LP Blanc - Seção Prótese Protocolo">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
@@ -617,81 +597,6 @@
     </div>
   </section>
 
-  <!-- ============ BENEFITS ============ -->
-  <section class="benefits">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Por que a Blanc</span>
-        <h2>Cuidado próximo, do primeiro contato ao pós-cirúrgico</h2>
-      </div>
-      <div class="benefit-grid">
-        <div class="benefit-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
-          <h3>Avaliação individual</h3>
-          <p>Cada caso é analisado com calma, sem respostas prontas ou genéricas.</p>
-        </div>
-        <div class="benefit-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <h3>Planejamento com tecnologia 3D</h3>
-          <p>Imagem e planejamento digital para um implante posicionado com precisão.</p>
-        </div>
-        <div class="benefit-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.4-9.5-9A5.5 5.5 0 0112 5a5.5 5.5 0 019.5 7c-2.5 4.6-9.5 9-9.5 9z"/></svg>
-          <h3>Acompanhamento completo</h3>
-          <p>Do primeiro contato até a cicatrização final, com atendimento próximo.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROCESS ============ -->
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Como funciona</span>
-        <h2>Do primeiro contato ao novo sorriso</h2>
-      </div>
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="process-num">01</div>
-          <h3>Contato pelo WhatsApp</h3>
-          <p>Você fala direto com a equipe e tira suas primeiras dúvidas.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-num">02</div>
-          <h3>Avaliação</h3>
-          <p>Exame e conversa para entender o seu caso específico.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-num">03</div>
-          <h3>Plano de tratamento</h3>
-          <p>Você recebe as opções, prazos e valores antes de decidir.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-num">04</div>
-          <h3>Procedimento e acompanhamento</h3>
-          <p>Cirurgia e retorno acompanhados de perto pela equipe.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CTA BAND ============ -->
-  <section style="padding-top:0;">
-    <div class="wrap">
-      <div class="cta-band">
-        <div>
-          <h2>Pronto para dar o primeiro passo?</h2>
-          <p>Fale agora pelo WhatsApp e agende sua avaliação com a Blanc.</p>
-        </div>
-        <button type="button" class="whatsapp-btn js-open-lead" data-mensagem="Olá, vim pelo anúncio e quero saber mais sobre implantes dentários." data-origem="LP Blanc - Botão CTA final">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
-          Chamar no WhatsApp
-        </button>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ FAQ ============ -->
   <section style="padding-top:0;">
     <div class="wrap" style="max-width:760px;">
@@ -710,6 +615,22 @@
       <div class="faq-item">
         <h3>Quais são as formas de pagamento?</h3>
         <p>Aceitamos PIX, cartão de débito, parcelamos no cartão de crédito, fazemos parcelamento no boleto. Programamos o pagamento para realizar o seu tratamento de uma forma que cabe no seu bolso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA BAND (final da página) ============ -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>Pronto para dar o primeiro passo?</h2>
+          <p>Fale agora pelo WhatsApp e agende sua avaliação com a Blanc.</p>
+        </div>
+        <button type="button" class="whatsapp-btn js-open-lead" data-mensagem="Olá, vim pelo anúncio e quero saber mais sobre implantes dentários." data-origem="LP Blanc - Botão CTA final">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
+          Chamar no WhatsApp
+        </button>
       </div>
     </div>
   </section>
