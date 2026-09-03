@@ -116,12 +116,13 @@
   .trust-item{ display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--graphite-soft); font-weight:600; }
   .trust-item svg{ width:18px; height:18px; color: var(--slate); flex-shrink:0; }
 
-  .hero-photo{
-    border-radius: var(--radius); overflow:hidden;
-    box-shadow: 0 30px 70px -30px rgba(35,46,55,0.45);
-    aspect-ratio: 9/16; margin-bottom: 22px; background: var(--slate-deep);
+  .hero-portrait{
+    display:flex; justify-content:center; align-items:flex-end;
+    height: 100%;
   }
-  .hero-photo img, .hero-photo video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-portrait img{
+    max-width:100%; max-height:520px; width:auto; height:auto; display:block;
+  }
 
   /* ---------- FORM CARD ---------- */
   .form-card{
@@ -263,6 +264,31 @@
     .protocol-grid{ grid-template-columns: 1fr; gap: 34px; }
   }
 
+  /* ---------- SOBRE O PROFISSIONAL ---------- */
+  .doctor-grid{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items:center; }
+  .doctor-video{
+    border-radius: var(--radius); overflow:hidden;
+    box-shadow: 0 30px 70px -30px rgba(35,46,55,0.45);
+    aspect-ratio: 9/16; background: var(--slate-deep);
+  }
+  .doctor-video video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .doctor-section h2{
+    font-family: var(--font-display); font-weight:500; font-size: clamp(26px,3vw,34px);
+    color: var(--slate-deep); margin-bottom: 18px;
+  }
+  .doctor-bio{ font-size:16px; font-weight:500; color: var(--graphite-soft); max-width:52ch; margin-bottom:22px; }
+  .doctor-credential{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase;
+    color: var(--slate); border:1.5px solid var(--line); border-radius: var(--radius);
+    padding:9px 16px; background:#fff;
+  }
+
+  @media (max-width: 880px){
+    .doctor-grid{ grid-template-columns: 1fr; gap: 30px; }
+    .doctor-carousel{ max-width: 300px; margin: 0 auto; }
+  }
+
   /* ---------- CARROSSEL (reutilizado na galeria e nos resultados) ---------- */
   .carousel{ position:relative; }
   .carousel-track{
@@ -366,7 +392,8 @@
     .hero{ padding: 32px 0 56px; }
     .hero-logo{ max-width: 220px; margin-bottom: 24px; }
     .hero-grid{ grid-template-columns: 1fr; gap: 40px; }
-    .hero-photo{ order:-1; aspect-ratio: 9/16; max-width: 320px; margin-left:auto; margin-right:auto; }
+    .hero-portrait{ order:-1; }
+    .hero-portrait img{ max-height: 340px; }
     .cta-band{ padding: 32px; flex-direction:column; align-items:flex-start; }
     .whatsapp-btn{ width:100%; justify-content:center; }
     .gallery-grid{ grid-template-columns: 1fr 1fr; grid-template-rows: 150px 110px 110px; height:auto; }
@@ -415,8 +442,8 @@
       </div>
 
       <div>
-        <div class="hero-photo">
-          <video src="images/consultorio-video.mp4" poster="images/consultorio-video-poster.jpg" controls playsinline preload="metadata" aria-label="Vídeo do consultório da Blanc Odontologia Estética"></video>
+        <div class="hero-portrait">
+          <img src="images/dr-gilsemar.png" alt="Dr. Gilsemar Mariano Junior, dentista da Blanc Odontologia Estética" loading="eager">
         </div>
 
         <form id="form" class="form-card" novalidate>
@@ -485,6 +512,40 @@
           <div class="protocol-card-label"><span class="dot"></span> Prótese protocolo sobre implantes</div>
           <img src="images/comparacao-protese-protocolo.jpg" alt="Prótese protocolo sobre implantes oferece estabilidade total" loading="lazy">
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE O PROFISSIONAL ============ -->
+  <section class="doctor-section">
+    <div class="wrap doctor-grid">
+      <div class="carousel doctor-carousel">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="doctor-video">
+              <video src="images/video-dr-gilsemar.mp4" poster="images/video-dr-gilsemar-poster.jpg" controls playsinline preload="metadata" aria-label="Vídeo do Dr. Gilsemar Mariano Junior"></video>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="doctor-video">
+              <video src="images/video-doutora.mp4" poster="images/video-doutora-poster.jpg" controls playsinline preload="metadata" aria-label="Vídeo da equipe da Blanc Odontologia Estética"></video>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="carousel-arrow prev" aria-label="Vídeo anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow next" aria-label="Próximo vídeo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="carousel-dots"></div>
+      </div>
+
+      <div>
+        <span class="eyebrow">Conheça o profissional</span>
+        <h2>Dr. Gilsemar Mariano Junior</h2>
+        <p class="doctor-bio">Especialista em implantes dentários, o Dr. Gilsemar conduz cada caso com atenção aos detalhes — do planejamento inicial ao acompanhamento pós-cirúrgico. Seu compromisso é devolver não só a função, mas a confiança de sorrir sem preocupação.</p>
+        <div class="doctor-credential">CRO-MG 30.048</div>
       </div>
     </div>
   </section>
@@ -669,6 +730,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-11.5A7 7 0 105 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
         Praça Nossa Senhora do Carmo, 314 — loja 2, Centro
       </div>
+      <p style="font-size:12.5px; color:var(--graphite-soft); margin-bottom:2px;">Dr. Gilsemar Mariano Junior — CRO-MG 30.048</p>
       <p>© <span id="ano"></span> Blanc Odontologia Estética — Implantes Dentários</p>
       <p style="font-size:11px; margin-top:4px; opacity:0.7;">Background: <a href="https://www.vecteezy.com" target="_blank" rel="noopener" style="color:inherit;">Vecteezy.com</a></p>
     </div>
