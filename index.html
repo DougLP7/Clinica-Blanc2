@@ -39,8 +39,8 @@
     --radius: 4px;
   }
 
-  *{ box-sizing: border-box; margin:0; padding:0; }
-  html{ scroll-behavior: smooth; overflow-x: hidden; }
+  *{ box-sizing: border-box; margin:0; padding:0; -webkit-tap-highlight-color: transparent; }
+  html{ scroll-behavior: smooth; overflow-x: hidden; touch-action: manipulation; }
   body{
     font-family: var(--font-body);
     background: var(--porcelain);
@@ -49,7 +49,16 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     position: relative;
+    touch-action: manipulation;
   }
+  a, button, input, textarea, select, .whatsapp-btn, .js-open-lead, .carousel-arrow, .submit-btn{
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button, input, textarea, select{
+    -webkit-appearance: none;
+  }
+  button:focus, a:focus{ outline-offset: 2px; }
   body::before{
     content: '';
     position: fixed;
@@ -765,6 +774,9 @@
 
   // Função única: registra o lead na planilha e só então redireciona pro WhatsApp.
   // Usada tanto pelo formulário principal quanto pelo popup dos outros botões.
+  // IMPORTANTE: esta função só é chamada DEPOIS que validarCampos() já aprovou
+  // nome + WhatsApp válidos. Ou seja, o evento de conversão abaixo só dispara
+  // para leads de verdade — nunca por um clique solto em qualquer botão.
   function enviarLead(nome, whatsDigits, mensagemBase, origem){
     if(APPS_SCRIPT_URL && APPS_SCRIPT_URL.indexOf('COLE_AQUI') === -1){
       fetch(APPS_SCRIPT_URL, {
@@ -780,8 +792,26 @@
       }).catch(function(){ /* segue o fluxo mesmo se falhar */ });
     }
 
+    // Dispara o evento de conversão para o Google Tag Manager / Google Ads.
+    // Só chega até aqui quem já preencheu nome + WhatsApp válidos e teve o
+    // cadastro processado — é isso que o GTM deve usar como gatilho da
+    // conversão "Lead - Whatsapp", em vez de contar qualquer clique no botão.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'lead_whatsapp',
+      lead_nome: nome,
+      lead_whatsapp: whatsDigits,
+      lead_origem: origem || 'LP Blanc - Implantes'
+    });
+
     const mensagem = encodeURIComponent("Olá, me chamo " + nome + ". " + mensagemBase);
-    window.location.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + mensagem;
+    const destino = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + mensagem;
+
+    // Pequeno atraso antes de sair da página: dá tempo do GTM efetivamente
+    // disparar a tag de conversão antes do navegador redirecionar para o WhatsApp.
+    setTimeout(function(){
+      window.location.href = destino;
+    }, 250);
   }
 
   function validarCampos(nome, whatsDigits, erroNomeEl, erroWhatsEl){
