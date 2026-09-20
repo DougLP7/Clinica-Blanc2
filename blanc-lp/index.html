@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blanc Odontologia Estética | Implantes Dentários</title>
+<meta name="description" content="Recupere seu sorriso com implantes dentários feitos por uma equipe especializada. Fale agora pelo WhatsApp e agende sua avaliação.">
+
+<!--
+  ===================================================================
+  COMO CONFIGURAR (leia antes de publicar):
+  1. Troque APPS_SCRIPT_URL abaixo pela URL do Web App do Google Apps
+     Script (você vai gerar isso no Passo 5 do projeto).
+  2. O número de WhatsApp já está configurado: (31) 99825-0649.
+  3. Esta pasta precisa ir junto com o arquivo "images/" quando você
+     subir pro GitHub — as fotos e a logo estão referenciadas de lá.
+  4. Onde estiver marcado com [SUBSTITUIR], troque pelo conteúdo real.
+  ===================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --porcelain: #FAF7F2;
+    --porcelain-deep: #F0EAE0;
+    --graphite: #2B2A28;
+    --graphite-soft: #403D35;
+    --slate: #465767;
+    --slate-deep: #232E37;
+    --brass: #B08D57;
+    --brass-light: #D9BC8C;
+    --line: rgba(43,42,40,0.12);
+    --whatsapp: #25D366;
+    --font-display: 'Newsreader', Georgia, serif;
+    --font-body: 'Manrope', -apple-system, sans-serif;
+    --radius: 4px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; -webkit-tap-highlight-color: transparent; }
+  html{ scroll-behavior: smooth; overflow-x: hidden; touch-action: manipulation; }
+  body{
+    font-family: var(--font-body);
+    background: var(--porcelain);
+    color: var(--graphite);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+    touch-action: manipulation;
+  }
+  a, button, input, textarea, select, .whatsapp-btn, .js-open-lead, .carousel-arrow, .submit-btn{
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button, input, textarea, select{
+    -webkit-appearance: none;
+  }
+  button:focus, a:focus{ outline-offset: 2px; }
+  body::before{
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 100vh;
+    height: 100dvh;
+    z-index: -1;
+    background:
+      linear-gradient(rgba(250,247,242,0.6), rgba(250,247,242,0.6)),
+      url('images/page-bg.jpg') center top / cover no-repeat;
+    pointer-events: none;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  section{ padding: 88px 0; }
+  h1,h2,h3{ font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em; }
+
+  :focus-visible{ outline: 2px solid var(--brass); outline-offset: 3px; }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position: sticky; top:0; z-index: 40;
+    background: rgba(250,247,242,0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:flex-end;
+    padding: 12px 24px; max-width:1120px; margin:0 auto;
+  }
+  .header-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size: 14px; font-weight:700; color: var(--slate);
+    text-decoration:none; white-space:nowrap;
+  }
+  .header-cta svg{ width:18px; height:18px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 56px 0 80px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:56px; align-items:start;
+  }
+  .hero-logo{ display:block; width:100%; max-width: 320px; height:auto; margin: 0 auto 36px; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size: 12.5px; font-weight:700; letter-spacing: 0.14em; text-transform:uppercase;
+    color: var(--brass); margin-bottom: 20px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background: var(--brass); }
+  .hero h1{
+    font-size: clamp(34px, 4.4vw, 52px); line-height: 1.08; color: var(--slate-deep);
+    max-width: 12ch;
+  }
+  .hero h1 span{ color: var(--brass); font-style: italic; }
+  .hero p.lede{
+    margin-top: 22px; font-size: 17px; font-weight: 500; color: var(--graphite-soft); max-width: 46ch;
+  }
+  .trust-row{
+    margin-top: 32px; display:flex; gap:28px; flex-wrap:wrap;
+  }
+  .trust-item{ display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--graphite-soft); font-weight:600; }
+  .trust-item svg{ width:18px; height:18px; color: var(--slate); flex-shrink:0; }
+
+  .video-carousel{ margin-bottom: 22px; }
+
+  /* ---------- FORM CARD ---------- */
+  .form-card{
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px 30px 30px;
+    box-shadow: 0 24px 60px -30px rgba(20,40,38,0.35);
+  }
+  .form-card h2{
+    font-size: 22px; color: var(--slate-deep); margin-bottom:6px;
+  }
+  .form-card .sub{
+    font-size: 13.5px; color: var(--graphite-soft); margin-bottom: 22px;
+  }
+  .field{ margin-bottom: 16px; }
+  .field label{
+    display:block; font-size: 12.5px; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.06em; color: var(--slate); margin-bottom: 7px;
+  }
+  .field input{
+    width:100%; padding: 13px 14px; font-size: 15px; font-family: var(--font-body);
+    border: 1.5px solid var(--line); border-radius: var(--radius);
+    background: var(--porcelain); color: var(--graphite);
+    transition: border-color .15s ease;
+  }
+  .field input:focus{ border-color: var(--brass); background:#fff; }
+  .field small{ display:block; margin-top:6px; font-size:12px; color:#B23B3B; min-height:14px; }
+
+  .submit-btn{
+    width:100%; margin-top: 6px;
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    background: var(--slate); color:#fff; border:none; border-radius: var(--radius);
+    padding: 15px 20px; font-family: var(--font-body); font-weight:700; font-size: 15.5px;
+    cursor:pointer; transition: background .15s ease, transform .1s ease;
+  }
+  .submit-btn:hover{ background: var(--slate-deep); }
+  .submit-btn:active{ transform: scale(0.99); }
+  .submit-btn svg{ width:19px; height:19px; }
+  .form-foot{ margin-top:14px; font-size:12px; color:var(--graphite-soft); text-align:center; }
+
+  /* ---------- RESULTS (antes/depois) ---------- */
+  .results{ background: var(--slate-deep); color: var(--porcelain); }
+  .section-head{ max-width: 620px; margin-bottom: 48px; }
+  .section-head .eyebrow{ color: var(--brass-light); }
+  .section-head .eyebrow::before{ background: var(--brass-light); }
+  .results h2{ font-size: clamp(26px,3vw,34px); color:#fff; }
+  .results .section-head p{ margin-top:12px; color: rgba(250,247,242,0.72); font-size:15px; }
+
+  .result-card{
+    background: rgba(250,247,242,0.04);
+    border: 1px solid rgba(250,247,242,0.14);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .result-photos{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .result-photos figure{ position:relative; }
+  .result-photos img{
+    width:100%; aspect-ratio: 3/4; object-fit:cover; border-radius: 3px;
+  }
+  .result-tag{
+    position:absolute; top:8px; left:8px;
+    font-size: 10.5px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;
+    background: rgba(35,46,55,0.82); color:#fff; padding: 4px 9px; border-radius: 2px;
+  }
+  .result-card h3{ font-family: var(--font-display); font-size: 19px; color:#fff; margin-bottom:6px; }
+  .result-card p{ font-size: 14px; color: rgba(250,247,242,0.68); }
+
+  .result-single{
+    border: 1px solid rgba(250,247,242,0.14); border-radius: var(--radius);
+    overflow:hidden; max-width: 420px; margin: 0 auto;
+  }
+  .result-single img{ width:100%; height:auto; display:block; }
+
+  .results-carousel .carousel-track{ align-items:flex-start; }
+
+  .results-cta{ text-align:center; margin-top: 40px; }
+  .results-cta p{ color: rgba(250,247,242,0.75); margin-bottom:18px; font-size:15px; }
+
+  .whatsapp-btn{
+    display:inline-flex; align-items:center; gap:10px; white-space:nowrap;
+    background: var(--whatsapp); color:#fff; font-weight:700; font-size:15px;
+    padding: 15px 26px; border-radius: var(--radius); text-decoration:none;
+    border:none; cursor:pointer; font-family: var(--font-body);
+  }
+  .whatsapp-btn:hover{ background: #1FB855; }
+  .whatsapp-btn svg{ width:20px; height:20px; }
+  .whatsapp-btn.lg{ padding: 18px 32px; font-size: 16.5px; }
+
+  /* ---------- PRÓTESE PROTOCOLO (seção de venda) ---------- */
+  .protocol-section{
+    position: relative;
+    background:
+      linear-gradient(100deg, rgba(20,26,31,0.94) 0%, rgba(20,26,31,0.86) 40%, rgba(20,26,31,0.55) 100%),
+      url('images/interior-recepcao.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  .protocol-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items:center;
+  }
+  .protocol-section .eyebrow{ color: var(--brass-light); }
+  .protocol-section .eyebrow::before{ background: var(--brass-light); }
+  .protocol-section h2{
+    font-size: clamp(30px, 4vw, 44px); line-height:1.15; color:#fff; margin-bottom: 22px;
+  }
+  .protocol-intro{ font-size: 18px; color: rgba(250,247,242,0.85); margin-bottom: 26px; max-width: 52ch; }
+
+  .protocol-bullets{ list-style:none; margin: 0 0 30px; display:flex; flex-direction:column; gap:16px; }
+  .protocol-bullets li{
+    display:flex; align-items:flex-start; gap:14px;
+    font-size: 20px; font-weight:700; color:#fff; line-height:1.3;
+  }
+  .protocol-bullets svg{
+    width:26px; height:26px; flex-shrink:0; margin-top:2px; color: var(--brass);
+  }
+
+  .protocol-lead{ font-size: 17px; font-weight:600; color: rgba(250,247,242,0.9); margin-bottom: 24px; }
+
+  .protocol-compare{ display:flex; flex-direction:column; gap: 20px; }
+  .protocol-card{
+    background:#fff; border-radius: var(--radius); padding: 16px;
+    box-shadow: 0 30px 70px -25px rgba(0,0,0,0.5);
+  }
+  .protocol-card img{ width:100%; border-radius: 2px; display:block; }
+  .protocol-card-label{
+    display:flex; align-items:center; gap:8px;
+    font-size: 13px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
+    padding: 2px 2px 12px;
+  }
+  .protocol-card-label .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .protocol-card.is-bad .protocol-card-label{ color:#A23B3B; }
+  .protocol-card.is-bad .dot{ background:#A23B3B; }
+  .protocol-card.is-good .protocol-card-label{ color: var(--slate); }
+  .protocol-card.is-good .dot{ background: var(--slate); }
+
+  @media (max-width: 880px){
+    .protocol-grid{ grid-template-columns: 1fr; gap: 34px; }
+  }
+
+  /* ---------- SOBRE O PROFISSIONAL ---------- */
+  .doctor-grid{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items:center; }
+  .doctor-video{
+    border-radius: var(--radius); overflow:hidden;
+    box-shadow: 0 30px 70px -30px rgba(35,46,55,0.45);
+    aspect-ratio: 9/16; background: var(--slate-deep);
+  }
+  .doctor-video video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .doctor-portrait{ position:relative; max-width: 340px; }
+  .doctor-portrait-backdrop{
+    position:absolute; inset: 16px -16px -16px 16px;
+    background: var(--brass-light);
+    border-radius: var(--radius);
+    z-index:0;
+  }
+  .doctor-portrait-frame{
+    position:relative; z-index:1;
+    aspect-ratio: 1/1;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow:hidden;
+    box-shadow: 0 28px 60px -25px rgba(35,46,55,0.5);
+  }
+  .doctor-portrait-frame img{
+    width:100%; height:100%; object-fit:cover; object-position: top center; display:block;
+  }
+
+  .doctor-section h2{
+    font-family: var(--font-display); font-weight:500; font-size: clamp(26px,3vw,34px);
+    color: var(--slate-deep); margin-bottom: 18px;
+  }
+  .doctor-bio{ font-size:16px; font-weight:500; color: var(--graphite-soft); max-width:52ch; margin-bottom:22px; }
+  .doctor-credential{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase;
+    color: var(--slate); border:1.5px solid var(--line); border-radius: var(--radius);
+    padding:9px 16px; background:#fff;
+  }
+
+  @media (max-width: 880px){
+    .doctor-grid{ grid-template-columns: 1fr; gap: 44px; }
+    .doctor-portrait{ max-width: 260px; margin: 0 auto; }
+  }
+
+  /* ---------- CARROSSEL (reutilizado na galeria e nos resultados) ---------- */
+  .carousel{ position:relative; }
+  .carousel-track{
+    display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch; gap:16px;
+    scrollbar-width:none;
+  }
+  .carousel-track::-webkit-scrollbar{ display:none; }
+  .carousel-slide{ flex:0 0 100%; scroll-snap-align:center; }
+
+  .carousel-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:44px; height:44px; border-radius:50%; border:none;
+    background:#fff; color: var(--slate-deep); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 10px 25px -8px rgba(0,0,0,0.45); z-index:5;
+  }
+  .carousel-arrow svg{ width:20px; height:20px; }
+  .carousel-arrow.prev{ left:10px; }
+  .carousel-arrow.next{ right:10px; }
+  .carousel-arrow:disabled{ opacity:0.3; cursor:default; }
+  .carousel-arrow:not(:disabled):hover{ background: var(--porcelain-deep); }
+
+  .carousel-dots{ display:flex; justify-content:center; gap:8px; margin-top:18px; }
+  .carousel-dots button{
+    width:8px; height:8px; border-radius:50%; border:none; padding:0;
+    background: var(--line); cursor:pointer;
+  }
+  .results .carousel-dots button{ background: rgba(250,247,242,0.28); }
+  .carousel-dots button.active{ background: var(--slate); width:22px; border-radius:4px; }
+  .results .carousel-dots button.active{ background: var(--brass-light); }
+
+  /* Galeria da clínica: mosaico compacto (fotos pequenas, com melhor qualidade percebida) */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+    height: 460px;
+  }
+  .g-item{ display:block; border-radius: var(--radius); overflow:hidden; }
+  .g-item img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .g-big{ grid-row: 1 / 3; }
+
+  @media (min-width: 881px){
+    .results-carousel{ max-width: 520px; margin: 0 auto; }
+  }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background: var(--porcelain-deep);
+    border-radius: var(--radius);
+    padding: 48px;
+    display:flex; align-items:center; justify-content:space-between; gap: 32px; flex-wrap: wrap;
+  }
+  .cta-band h2{ font-size: 26px; color: var(--slate-deep); max-width: 24ch; }
+  .cta-band p{ margin-top: 8px; color: var(--graphite-soft); font-size: 14.5px; font-weight: 500; }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{ border-top: 1px solid var(--line); padding: 22px 0; }
+  .faq-item:last-child{ border-bottom: 1px solid var(--line); }
+  .faq-item h3{ font-size: 16px; font-weight:600; color: var(--slate-deep); margin-bottom:8px; }
+  .faq-item p{ font-size: 14.5px; font-weight: 500; color: var(--graphite-soft); max-width: 60ch; }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(35,46,55,0.55);
+    display:flex; align-items:center; justify-content:center;
+    padding: 20px;
+  }
+  .modal-overlay[hidden]{ display:none; }
+  .modal-card{
+    position:relative; background:#fff; width:100%; max-width: 420px;
+    border-radius: var(--radius); padding: 34px 30px 30px;
+    box-shadow: 0 30px 80px -20px rgba(20,30,38,0.5);
+  }
+  .modal-card h2{ font-size: 22px; color: var(--slate-deep); margin-bottom:6px; }
+  .modal-card .sub{ font-size: 13.5px; color: var(--graphite-soft); margin-bottom: 22px; }
+  .modal-close{
+    position:absolute; top:14px; right:14px; width:30px; height:30px;
+    border:none; background:transparent; font-size: 24px; line-height:1;
+    color: var(--graphite-soft); cursor:pointer;
+  }
+  .modal-close:hover{ color: var(--graphite); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding: 40px 0; border-top: 1px solid var(--line); }
+  footer .wrap{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; }
+  footer p{ font-size: 12.5px; color: var(--graphite-soft); }
+  .footer-address{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    font-size: 12.5px; color: var(--graphite-soft);
+  }
+  .footer-address svg{ width:14px; height:14px; color: var(--slate); flex-shrink:0; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 880px){
+    body::before{ background-position: left top; }
+    section{ padding: 56px 0; }
+    .hero{ padding: 32px 0 56px; }
+    .hero-logo{ max-width: 220px; margin-bottom: 24px; }
+    .hero-grid{ grid-template-columns: 1fr; gap: 40px; }
+    .video-carousel{ order:-1; max-width: 320px; margin: 0 auto 22px; }
+    .cta-band{ padding: 32px; flex-direction:column; align-items:flex-start; }
+    .whatsapp-btn{ width:100%; justify-content:center; }
+    .gallery-grid{ grid-template-columns: 1fr 1fr; grid-template-rows: 150px 110px 110px; height:auto; }
+    .g-big{ grid-column: 1 / 3; grid-row: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="header-cta" href="#form">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 4L3 11l6.5 2.5L12 20l3-6.5L20 4z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO + FORM ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <img class="hero-logo" src="images/blanc-logo.png" alt="Blanc Odontologia Estética">
+        <span class="eyebrow">Implantes dentários</span>
+        <h1>Recupere a firmeza do seu <span>sorriso</span></h1>
+        <p class="lede">
+          Avaliação personalizada com uma equipe especializada em implantes.
+          Fale agora pelo WhatsApp e descubra o melhor caminho para o seu caso.
+        </p>
+        <div class="trust-row">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+            Equipe especializada em implantes
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            Avaliação sem compromisso
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="carousel video-carousel">
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <div class="doctor-video">
+                <video src="images/video-dr-gilsemar.mp4" poster="images/video-dr-gilsemar-poster.jpg" controls playsinline preload="metadata" aria-label="Vídeo do Dr. Gilsemar Mariano Junior"></video>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="doctor-video">
+                <video src="images/video-doutora.mp4" poster="images/video-doutora-poster.jpg" controls playsinline preload="metadata" aria-label="Vídeo da equipe da Blanc Odontologia Estética"></video>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="carousel-arrow prev" aria-label="Vídeo anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="carousel-arrow next" aria-label="Próximo vídeo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <div class="carousel-dots"></div>
+        </div>
+
+        <form id="form" class="form-card" novalidate>
+          <h2>Agende sua avaliação</h2>
+          <p class="sub">Preencha e você será direcionado direto para o nosso WhatsApp.</p>
+
+          <div class="field">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Seu nome">
+            <small id="erro-nome"></small>
+          </div>
+
+          <div class="field">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="(31) 90000-0000" inputmode="tel">
+            <small id="erro-whatsapp"></small>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
+            Quero falar no WhatsApp
+          </button>
+          <p class="form-foot">Seus dados são usados apenas para este atendimento.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRÓTESE PROTOCOLO (seção de venda) ============ -->
+  <section class="protocol-section">
+    <div class="wrap protocol-grid">
+      <div>
+        <span class="eyebrow">Prótese protocolo sobre implantes</span>
+        <h2>Cansado da dentadura solta ou que machuca?</h2>
+        <p class="protocol-intro">A prótese protocolo é fixa, parafusada sobre implantes — muito mais estável que uma dentadura comum.</p>
+
+        <ul class="protocol-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+            Mais segurança para mastigar
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+            Mais confiança para sorrir
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+            Mais liberdade no dia a dia
+          </li>
+        </ul>
+
+        <p class="protocol-lead">Agende sua avaliação e descubra se é indicada pra você.</p>
+
+        <button type="button" class="whatsapp-btn lg js-open-lead" data-mensagem="Olá, quero saber se a prótese protocolo é indicada pro meu caso." data-origem="LP Blanc - Seção Prótese Protocolo">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
+          Agendar minha avaliação
+        </button>
+      </div>
+
+      <div class="protocol-compare">
+        <div class="protocol-card is-bad">
+          <div class="protocol-card-label"><span class="dot"></span> Dentadura convencional</div>
+          <img src="images/comparacao-dentadura-convencional.jpg" alt="Dentadura convencional causa instabilidade e perda óssea" loading="lazy">
+        </div>
+        <div class="protocol-card is-good">
+          <div class="protocol-card-label"><span class="dot"></span> Prótese protocolo sobre implantes</div>
+          <img src="images/comparacao-protese-protocolo.jpg" alt="Prótese protocolo sobre implantes oferece estabilidade total" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE O PROFISSIONAL ============ -->
+  <section class="doctor-section">
+    <div class="wrap doctor-grid">
+      <div class="doctor-portrait">
+        <div class="doctor-portrait-backdrop"></div>
+        <div class="doctor-portrait-frame">
+          <img src="images/dr-gilsemar.png" alt="Dr. Gilsemar Mariano Junior, dentista da Blanc Odontologia Estética" loading="lazy">
+        </div>
+      </div>
+
+      <div>
+        <span class="eyebrow">Conheça o profissional</span>
+        <h2>Dr. Gilsemar Mariano Junior</h2>
+        <p class="doctor-bio">Especialista em implantes dentários, o Dr. Gilsemar conduz cada caso com atenção aos detalhes — do planejamento inicial ao acompanhamento pós-cirúrgico. Seu compromisso é devolver não só a função, mas a confiança de sorrir sem preocupação.</p>
+        <div class="doctor-credential">CRO-MG 30.048</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTADOS REAIS ============ -->
+  <section class="results">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Resultados reais</span>
+        <h2>Sorrisos que a Blanc transformou</h2>
+        <p>Pacientes reais, atendidos na clínica — resultado do planejamento e do cuidado em cada etapa.</p>
+      </div>
+
+      <div class="carousel results-carousel">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="result-card">
+              <div class="result-photos">
+                <figure>
+                  <span class="result-tag">Antes</span>
+                  <img src="images/dalva-antes.jpg" alt="Sorriso antes do tratamento de implante" loading="lazy">
+                </figure>
+                <figure>
+                  <span class="result-tag">Depois</span>
+                  <img src="images/dalva-depois.jpg" alt="Sorriso depois do tratamento de implante" loading="lazy">
+                </figure>
+              </div>
+              <h3>Dalva</h3>
+              <p>Recuperou dentes fixos e a confiança para sorrir sem se preocupar.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="result-card">
+              <div class="result-photos">
+                <figure>
+                  <span class="result-tag">Antes</span>
+                  <img src="images/mariahelena-antes.jpg" alt="Sorriso antes do tratamento de implante" loading="lazy">
+                </figure>
+                <figure>
+                  <span class="result-tag">Depois</span>
+                  <img src="images/mariahelena-depois.jpg" alt="Sorriso depois do tratamento de implante" loading="lazy">
+                </figure>
+              </div>
+              <h3>Maria Helena</h3>
+              <p>Um novo sorriso, planejado para durar e para devolver naturalidade ao rosto.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="result-single">
+              <img src="images/transformacao-1.jpg" alt="Transformação de sorriso com implante dentário" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="result-single">
+              <img src="images/transformacao-2.jpg" alt="Transformação de sorriso com implante dentário" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="result-single">
+              <img src="images/transformacao-3.jpg" alt="Transformação de sorriso com implante dentário" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="carousel-arrow prev" aria-label="Resultado anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow next" aria-label="Próximo resultado">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="carousel-dots"></div>
+      </div>
+
+      <div class="results-cta">
+        <p>Você também pode ter um resultado assim.</p>
+        <button type="button" class="whatsapp-btn js-open-lead" data-mensagem="Olá, vi os resultados de implantes da Blanc e quero agendar minha avaliação." data-origem="LP Blanc - Botão Resultados">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
+          Quero agendar minha avaliação
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONHEÇA A CLÍNICA ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Conheça a Blanc</span>
+        <h2>Um ambiente pensado para o seu conforto</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="g-item g-big">
+          <img src="images/interior-recepcao.jpg" alt="Recepção da Blanc Odontologia Estética" loading="lazy">
+        </div>
+        <div class="g-item">
+          <img src="images/interior-consultorio.jpg" alt="Consultório da Blanc Odontologia Estética" loading="lazy">
+        </div>
+        <div class="g-item">
+          <img src="images/interior-tomografia.jpg" alt="Sala de tomografia da Blanc Odontologia Estética" loading="lazy">
+        </div>
+        <div class="g-item">
+          <img src="images/interior-detalhe.jpg" alt="Detalhe da decoração da clínica" loading="lazy">
+        </div>
+        <div class="g-item">
+          <img src="images/interior-consultorio-diplomas.jpg" alt="Consultório da Blanc com certificações na parede" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section style="padding-top:0;">
+    <div class="wrap" style="max-width:760px;">
+      <div class="section-head">
+        <span class="eyebrow">Dúvidas comuns</span>
+        <h2>Perguntas frequentes</h2>
+      </div>
+      <div class="faq-item">
+        <h3>O implante dói?</h3>
+        <p>O procedimento é feito com anestesia e o desconforto no pós-operatório costuma ser leve. Isso é conversado em detalhe na sua avaliação.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Quanto tempo leva o tratamento?</h3>
+        <p>Varia de pessoa para pessoa. Depois da avaliação, você recebe um prazo estimado para o seu caso específico.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Quais são as formas de pagamento?</h3>
+        <p>Aceitamos PIX, cartão de débito, parcelamos no cartão de crédito, fazemos parcelamento no boleto. Programamos o pagamento para realizar o seu tratamento de uma forma que cabe no seu bolso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA BAND (final da página) ============ -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>Pronto para dar o primeiro passo?</h2>
+          <p>Fale agora pelo WhatsApp e agende sua avaliação com a Blanc.</p>
+        </div>
+        <button type="button" class="whatsapp-btn js-open-lead" data-mensagem="Olá, vim pelo anúncio e quero saber mais sobre implantes dentários." data-origem="LP Blanc - Botão CTA final">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
+          Chamar no WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ MODAL DE CADASTRO (usado pelos botões de WhatsApp fora do formulário principal) ============ -->
+<div class="modal-overlay" id="lead-modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button type="button" class="modal-close" id="modal-close" aria-label="Fechar">&times;</button>
+    <h2 id="modal-title">Agende sua avaliação</h2>
+    <p class="sub">Preencha e você será direcionado direto para o nosso WhatsApp.</p>
+
+    <form id="modal-form" novalidate>
+      <div class="field">
+        <label for="modal-nome">Nome completo</label>
+        <input type="text" id="modal-nome" name="nome" autocomplete="name" placeholder="Seu nome">
+        <small id="modal-erro-nome"></small>
+      </div>
+      <div class="field">
+        <label for="modal-whatsapp">WhatsApp</label>
+        <input type="tel" id="modal-whatsapp" name="whatsapp" autocomplete="tel" placeholder="(31) 90000-0000" inputmode="tel">
+        <small id="modal-erro-whatsapp"></small>
+      </div>
+      <button type="submit" class="submit-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.5zm-8.5 18.3h-.1a9.9 9.9 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 01-1.5-5.3c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 012.9 7c0 5.5-4.5 10-9.9 10z"/></svg>
+        Quero falar no WhatsApp
+      </button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-info">
+      <div class="footer-address">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-11.5A7 7 0 105 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        Praça Nossa Senhora do Carmo, 314 — loja 2, Centro
+      </div>
+      <p style="font-size:12.5px; color:var(--graphite-soft); margin-bottom:2px;">Dr. Gilsemar Mariano Junior — CRO-MG 30.048</p>
+      <p>© <span id="ano"></span> Blanc Odontologia Estética — Implantes Dentários</p>
+      <p style="font-size:11px; margin-top:4px; opacity:0.7;">Background: <a href="https://www.vecteezy.com" target="_blank" rel="noopener" style="color:inherit;">Vecteezy.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  // TODO: troque pela URL do Web App do Google Apps Script (Passo 5 do projeto)
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQ6BC8p1D2w9VrDJ7hJYF_ypnLvWtBzYXpNVd_5XYqAFfmVvfEndK3gVEr7-VntYPAKg/exec";
+
+  const WHATSAPP_NUMBER = "5531998250649";
+
+  function limparNumero(v){ return v.replace(/\D/g, ''); }
+
+  // Função única: registra o lead na planilha e só então redireciona pro WhatsApp.
+  // Usada tanto pelo formulário principal quanto pelo popup dos outros botões.
+  // IMPORTANTE: esta função só é chamada DEPOIS que validarCampos() já aprovou
+  // nome + WhatsApp válidos. Ou seja, o evento de conversão abaixo só dispara
+  // para leads de verdade — nunca por um clique solto em qualquer botão.
+  function enviarLead(nome, whatsDigits, mensagemBase, origem){
+    if(APPS_SCRIPT_URL && APPS_SCRIPT_URL.indexOf('COLE_AQUI') === -1){
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          nome: nome,
+          whatsapp: whatsDigits,
+          origem: origem || 'LP Blanc - Implantes',
+          data: new Date().toISOString()
+        })
+      }).catch(function(){ /* segue o fluxo mesmo se falhar */ });
+    }
+
+    // Dispara o evento de conversão para o Google Tag Manager / Google Ads.
+    // Só chega até aqui quem já preencheu nome + WhatsApp válidos e teve o
+    // cadastro processado — é isso que o GTM deve usar como gatilho da
+    // conversão "Lead - Whatsapp", em vez de contar qualquer clique no botão.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'lead_whatsapp',
+      lead_nome: nome,
+      lead_whatsapp: whatsDigits,
+      lead_origem: origem || 'LP Blanc - Implantes'
+    });
+
+    const mensagem = encodeURIComponent("Olá, me chamo " + nome + ". " + mensagemBase);
+    const destino = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + mensagem;
+
+    // Pequeno atraso antes de sair da página: dá tempo do GTM efetivamente
+    // disparar a tag de conversão antes do navegador redirecionar para o WhatsApp.
+    setTimeout(function(){
+      window.location.href = destino;
+    }, 250);
+  }
+
+  function validarCampos(nome, whatsDigits, erroNomeEl, erroWhatsEl){
+    erroNomeEl.textContent = '';
+    erroWhatsEl.textContent = '';
+    let valido = true;
+    if(nome.length < 3){
+      erroNomeEl.textContent = 'Digite seu nome completo.';
+      valido = false;
+    }
+    if(whatsDigits.length < 10){
+      erroWhatsEl.textContent = 'Digite um WhatsApp válido com DDD.';
+      valido = false;
+    }
+    return valido;
+  }
+
+  // ---------- Formulário principal (hero) ----------
+  const form = document.getElementById('form');
+  const nomeInput = document.getElementById('nome');
+  const whatsInput = document.getElementById('whatsapp');
+  const erroNome = document.getElementById('erro-nome');
+  const erroWhats = document.getElementById('erro-whatsapp');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const nome = nomeInput.value.trim();
+    const whatsDigits = limparNumero(whatsInput.value);
+    if(!validarCampos(nome, whatsDigits, erroNome, erroWhats)) return;
+    enviarLead(nome, whatsDigits, "Vim pelo anúncio e quero saber mais sobre implantes dentários.", "LP Blanc - Formulário principal");
+  });
+
+  // ---------- Modal (botões de WhatsApp fora do formulário principal) ----------
+  const modal = document.getElementById('lead-modal');
+  const modalForm = document.getElementById('modal-form');
+  const modalNome = document.getElementById('modal-nome');
+  const modalWhats = document.getElementById('modal-whatsapp');
+  const modalErroNome = document.getElementById('modal-erro-nome');
+  const modalErroWhats = document.getElementById('modal-erro-whatsapp');
+  const modalClose = document.getElementById('modal-close');
+  let mensagemAtual = "Vim pelo anúncio e quero saber mais sobre implantes dentários.";
+  let origemAtual = "LP Blanc - Botão WhatsApp";
+
+  function abrirModal(mensagem, origem){
+    mensagemAtual = mensagem || mensagemAtual;
+    origemAtual = origem || origemAtual;
+    modal.hidden = false;
+    modalNome.value = '';
+    modalWhats.value = '';
+    modalErroNome.textContent = '';
+    modalErroWhats.textContent = '';
+    setTimeout(function(){ modalNome.focus(); }, 50);
+  }
+  function fecharModal(){ modal.hidden = true; }
+
+  document.querySelectorAll('.js-open-lead').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      abrirModal(btn.getAttribute('data-mensagem'), btn.getAttribute('data-origem'));
+    });
+  });
+
+  modalClose.addEventListener('click', fecharModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) fecharModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) fecharModal(); });
+
+  modalForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const nome = modalNome.value.trim();
+    const whatsDigits = limparNumero(modalWhats.value);
+    if(!validarCampos(nome, whatsDigits, modalErroNome, modalErroWhats)) return;
+    enviarLead(nome, whatsDigits, mensagemAtual, origemAtual);
+  });
+
+  // ---------- Carrossel (galeria da clínica + resultados reais) ----------
+  function initCarousel(root){
+    const track = root.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const prevBtn = root.querySelector('.carousel-arrow.prev');
+    const nextBtn = root.querySelector('.carousel-arrow.next');
+    const dotsWrap = root.querySelector('.carousel-dots');
+
+    slides.forEach(function(_, i){
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Ir para o item ' + (i + 1));
+      dot.addEventListener('click', function(){ scrollToIndex(i); });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function currentIndex(){
+      return Math.round(track.scrollLeft / track.clientWidth);
+    }
+    function updateUI(){
+      const idx = currentIndex();
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
+      if(prevBtn) prevBtn.disabled = idx <= 0;
+      if(nextBtn) nextBtn.disabled = idx >= slides.length - 1;
+    }
+    function scrollToIndex(i){
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    }
+    if(prevBtn) prevBtn.addEventListener('click', function(){ scrollToIndex(Math.max(0, currentIndex() - 1)); });
+    if(nextBtn) nextBtn.addEventListener('click', function(){ scrollToIndex(Math.min(slides.length - 1, currentIndex() + 1)); });
+
+    let scrollTimer;
+    track.addEventListener('scroll', function(){
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(updateUI, 80);
+    });
+    let resizeTimer;
+    window.addEventListener('resize', function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){ scrollToIndex(currentIndex()); }, 150);
+    });
+    updateUI();
+  }
+  document.querySelectorAll('.carousel').forEach(initCarousel);
+</script>
+
+</body>
+</html>
